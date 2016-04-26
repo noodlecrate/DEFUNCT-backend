@@ -1,5 +1,8 @@
 {
   "name": "noodlecrate-backend",
   "version": false,
-  "dependencies": {}
+  "dependencies": {},
+  "ambientDependencies": {
+    "node": "registry:dt/node#4.0.0+20160423143914"
+  }
 }
