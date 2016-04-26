@@ -15,12 +15,18 @@ app.get('/noodles/', (req, res) => {
         {
             id: 0,
             name: 'Prawn Chilli Noodle',
-            description: 'spicy yum yum'
+            description: 'spicy yum yum',
+            image: {
+                thumb: 'http://i.imgur.com/RD2djUw.jpg?1'
+            }
         },
         {
             id: 1,
             name: 'Shredded Chicken Noodle',
-            description: 'Nicer than fried chicken'
+            description: 'Nicer than fried chicken',
+            image: {
+                thumb: 'http://i.imgur.com/WuJVusY.jpg?1'
+            }
         }
     ]);
 });
