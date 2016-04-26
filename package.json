@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/noodlecrate/backend/issues"
   },
-  "homepage": "https://github.com/noodlecrate/backend"
+  "homepage": "https://github.com/noodlecrate/backend",
+  "devDependencies": {
+    "typescript": "^1.8.10"
+  }
 }
