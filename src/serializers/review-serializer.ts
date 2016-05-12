@@ -7,6 +7,7 @@ export class ReviewSerializer
 
     public serialize(model: ReviewModel): any {
         return {
+            id: model.getId(),
             title: model.getTitle(),
             body: model.getBody(),
             score: model.getScore()
@@ -14,7 +15,7 @@ export class ReviewSerializer
     }
 
     public deserialize(json: any): ReviewModel {
-        return new ReviewModel(json.title, json.body, json.score);
+        return new ReviewModel(parseInt(json.id), json.title, json.body, json.score);
     }
 
 }
