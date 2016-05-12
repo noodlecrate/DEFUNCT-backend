@@ -14,9 +14,9 @@ app.use((req, res, next) => {
 });
 
 let reviews: Array<ReviewModel> = [];
-reviews.push(new ReviewModel("Great noodles, top class.", "These really have to be among some of the best noodles I've ever tasted. Their noodliness was as noodly as it gets.", 100.00));
-reviews.push(new ReviewModel("Not a fan", "noodles were too spicy for my tongue", 0.00));
-reviews.push(new ReviewModel("They were alright, I suppose...", "They weren't the best, but they weren't the worst. Food's food, I guess.", 50.00));
+reviews[1] = new ReviewModel(1, "Great noodles, top class.", "These really have to be among some of the best noodles I've ever tasted. Their noodliness was as noodly as it gets.", 100.00);
+reviews[2] = new ReviewModel(2, "Not a fan", "noodles were too spicy for my tongue", 0.00);
+reviews[3] = new ReviewModel(3, "They were alright, I suppose...", "They weren't the best, but they weren't the worst. Food's food, I guess.", 50.00);
 
 app.get('/reviews/', (req, res) => {
     let serialized: Array<any> = [];
