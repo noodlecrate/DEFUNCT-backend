@@ -21,7 +21,8 @@
         "!node_modules/**"
     ],
     "files": [
-        "index.ts"
+        "index.ts",
+        "models/review-model.ts"
     ],
     "atom": {
         "rewriteTsconfig": true
