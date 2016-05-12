@@ -22,7 +22,8 @@
     ],
     "files": [
         "index.ts",
-        "models/review-model.ts"
+        "models/review-model.ts",
+        "serializers/serializer.i.ts"
     ],
     "atom": {
         "rewriteTsconfig": true
