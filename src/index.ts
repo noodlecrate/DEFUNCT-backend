@@ -26,6 +26,12 @@ app.get('/reviews/', (req, res) => {
     res.send(serialized);
 });
 
+app.get('/reviews/:id', (req, res) => {
+    let id = parseInt(req.params['id']);
+
+    res.send(reviewSerializer.serialize(reviews[id]));
+});
+
 app.get('/noodles/', (req, res) => {
     res.send([
         {
