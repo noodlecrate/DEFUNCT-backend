@@ -28,8 +28,18 @@ app.get('/reviews/', (req, res) => {
 
 app.get('/reviews/:id', (req, res) => {
     let id = parseInt(req.params['id']);
+    let review = reviews[id];
 
-    res.send(reviewSerializer.serialize(reviews[id]));
+    if (review === undefined) {
+        res.status(400).json({
+            error: {
+                message: 'Bad parameter \'id\''
+            }
+        });
+        return;
+    }
+
+    res.send(reviewSerializer.serialize(review));
 });
 
 app.get('/noodles/', (req, res) => {
