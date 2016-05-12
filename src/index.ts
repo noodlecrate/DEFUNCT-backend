@@ -18,6 +18,14 @@ reviews.push(new ReviewModel("Great noodles, top class.", "These really have to 
 reviews.push(new ReviewModel("Not a fan", "noodles were too spicy for my tongue", 0.00));
 reviews.push(new ReviewModel("They were alright, I suppose...", "They weren't the best, but they weren't the worst. Food's food, I guess.", 50.00));
 
+app.get('/reviews/', (req, res) => {
+    let serialized: Array<any> = [];
+
+    reviews.forEach(r => serialized.push(reviewSerializer.serialize(r)));
+
+    res.send(serialized);
+});
+
 app.get('/noodles/', (req, res) => {
     res.send([
         {
