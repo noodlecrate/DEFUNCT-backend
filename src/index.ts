@@ -31,9 +31,9 @@ app.get('/reviews/:id', (req, res) => {
     let review = reviews[id];
 
     if (review === undefined) {
-        res.status(400).json({
+        res.status(404).json({
             error: {
-                message: 'Bad parameter \'id\''
+                message: `Resource not found for id '${id}'`
             }
         });
         return;
