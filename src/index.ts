@@ -1,8 +1,10 @@
 /// <reference path="../typings/main.d.ts" />
 
 import * as express from 'express';
+import { ReviewSerializer } from "./serializers/review-serializer";
 
 let app = express();
+let reviewSerializer = new ReviewSerializer(); // get some nice IoC here
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:69');
