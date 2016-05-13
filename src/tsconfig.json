@@ -23,6 +23,7 @@
     "files": [
         "index.ts",
         "models/review-model.ts",
+        "serializers/review-serializer.ts",
         "serializers/serializer.i.ts"
     ],
     "atom": {
