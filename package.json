@@ -6,7 +6,8 @@
   "scripts": {
     "build": "typings install && tsc -p src",
     "build-test": "typings install && tsc -p test",
-    "start": "node build/index.js"
+    "start": "node build/index.js",
+    "test": "npm run build-test && modunit \"build-test/test/**/*.test.js\""
   },
   "repository": {
     "type": "git",
