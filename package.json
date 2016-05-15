@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "typings install && tsc -p src",
+    "build-test": "typings install && tsc -p test",
     "start": "node build/index.js"
   },
   "repository": {
