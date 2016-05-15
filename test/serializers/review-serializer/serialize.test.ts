@@ -18,3 +18,17 @@ test('id is serialized correctly', (t, inputId) => {
     [ 20 ],
     [ 256 ]
 ]);
+
+test('title is serialized correctly', (t, inputTitle) => {
+
+    let serializer = new ReviewSerializer();
+    let model = new ReviewModel(1, inputTitle, 'test body', 100.00);
+    let json = serializer.serialize(model);
+
+    t.assert.equal(inputTitle, json.title);
+
+}, [
+    [ 'some title' ],
+    [ 'best noodles ever' ],
+    [ 'another great review title' ]
+]);
