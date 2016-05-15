@@ -32,3 +32,17 @@ test('title is serialized correctly', (t, inputTitle) => {
     [ 'best noodles ever' ],
     [ 'another great review title' ]
 ]);
+
+test('body is serialized correctly', (t, inputBody) => {
+
+    let serializer = new ReviewSerializer();
+    let model = new ReviewModel(1, 'test title', inputBody, 100.00);
+    let json = serializer.serialize(model);
+
+    t.assert.equal(inputBody, json.body);
+
+}, [
+    [ 'lorem ipsum dolor sit amet' ],
+    [ 'never gonna give you up, never gonna let you down' ],
+    [ 'overpaid CEOs and communists cannot destroy our medical dramas' ]
+]);
