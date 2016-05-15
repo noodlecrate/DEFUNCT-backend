@@ -27,5 +27,8 @@
   },
   "dependencies": {
     "express": "^4.13.4"
+  },
+  "modunit": {
+    "reporter": "tap-heart"
   }
 }
