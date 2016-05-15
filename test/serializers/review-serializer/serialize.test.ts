@@ -46,3 +46,17 @@ test('body is serialized correctly', (t, inputBody) => {
     [ 'never gonna give you up, never gonna let you down' ],
     [ 'overpaid CEOs and communists cannot destroy our medical dramas' ]
 ]);
+
+test('score is serialized correctly', (t, inputScore) => {
+
+    let serializer = new ReviewSerializer();
+    let model = new ReviewModel(1, 'test title', 'test body', inputScore);
+    let json = serializer.serialize(model);
+
+    t.assert.equal(inputScore, json.score);
+
+}, [
+    [ 10.00 ],
+    [ 20.00 ],
+    [ 50.00 ]
+]);
