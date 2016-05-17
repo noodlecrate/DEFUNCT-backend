@@ -25,7 +25,8 @@
         "models/review-model.ts",
         "models/user-model.ts",
         "serializers/review-serializer.ts",
-        "serializers/serializer.i.ts"
+        "serializers/serializer.i.ts",
+        "serializers/user-serializer.ts"
     ],
     "atom": {
         "rewriteTsconfig": true
