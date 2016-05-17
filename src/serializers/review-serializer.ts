@@ -12,7 +12,7 @@ export class ReviewSerializer
             body: model.getBody(),
             score: model.getScore(),
             imageUrl: model.getImageUrl()
-        }
+        };
     }
 
     public deserialize(json: any): ReviewModel {
