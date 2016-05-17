@@ -46,3 +46,17 @@ test('first name is serialized correctly', (t, inputFirstName) => {
     [ 'Aaron' ],
     [ 'Louis' ]
 ]);
+
+test('last name is serialized correctly', (t, inputLastName) => {
+
+    let serializer = new UserSerializer();
+    let model = new UserModel(1, 'joe.bloggs', 'Joe', inputLastName);
+    let json = serializer.serialize(model);
+
+    t.assert.equal(inputLastName, json.lastName);
+
+}, [
+    [ 'Smith' ],
+    [ 'Wright' ],
+    [ 'Andrews' ]
+]);
