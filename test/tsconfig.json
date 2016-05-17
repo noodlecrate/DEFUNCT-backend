@@ -21,7 +21,8 @@
         "!node_modules/**"
     ],
     "files": [
-        "serializers/review-serializer/serialize.test.ts"
+        "serializers/review-serializer/serialize.test.ts",
+        "serializers/user-serializer/serialize.test.ts"
     ],
     "atom": {
         "rewriteTsconfig": true

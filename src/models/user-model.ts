@@ -1,4 +1,4 @@
-export class ReviewModel {
+export class UserModel {
 
     private id: number;
     private username: string;
