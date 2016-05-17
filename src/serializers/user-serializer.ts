@@ -7,7 +7,10 @@ export class UserSerializer
 
     public serialize(model: UserModel): any {
         return {
-
+            id: model.getId(),
+            username: model.getUsername(),
+            firstName: model.getFirstName(),
+            lastName: model.getLastName()
         };
     }
 
