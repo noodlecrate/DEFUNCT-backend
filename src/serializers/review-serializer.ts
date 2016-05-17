@@ -10,7 +10,8 @@ export class ReviewSerializer
             id: model.getId(),
             title: model.getTitle(),
             body: model.getBody(),
-            score: model.getScore()
+            score: model.getScore(),
+            imageUrl: model.getImageUrl()
         }
     }
 
