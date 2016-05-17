@@ -16,22 +16,38 @@ app.use((req, res, next) => {
     next();
 });
 
-let reviews: Array<ReviewModel> = [];
-reviews[1] = new ReviewModel(1, "Great noodles, top class.", "These really have to be among some of the best noodles I've ever tasted. Their noodliness was as noodly as it gets.", 100.00, 'https://i.ytimg.com/vi/XutaTTNihe0/hqdefault.jpg');
-reviews[2] = new ReviewModel(2, "Not a fan", "noodles were too spicy for my tongue", 0.00, 'http://i.dailymail.co.uk/i/pix/2014/09/03/article-2740204-1C5E561F00000578-366_634x626.jpg');
-reviews[3] = new ReviewModel(3, "They were alright, I suppose...", "They weren't the best, but they weren't the worst. Food's food, I guess.", 50.00, 'http://i798.photobucket.com/albums/yy262/expressionofmyemotions/tumblr_lrud0coRjU1qhsw0o.gif');
+let reviewRepository = {
+   getAll: (): Array<ReviewModel> => {
+      let reviews: Array<ReviewModel> = [];
+      reviews[1] = new ReviewModel(1, "Great noodles, top class.", "These really have to be among some of the best noodles I've ever tasted. Their noodliness was as noodly as it gets.", 100.00, 'https://i.ytimg.com/vi/XutaTTNihe0/hqdefault.jpg');
+      reviews[2] = new ReviewModel(2, "Not a fan", "noodles were too spicy for my tongue", 0.00, 'http://i.dailymail.co.uk/i/pix/2014/09/03/article-2740204-1C5E561F00000578-366_634x626.jpg');
+      reviews[3] = new ReviewModel(3, "They were alright, I suppose...", "They weren't the best, but they weren't the worst. Food's food, I guess.", 50.00, 'http://i798.photobucket.com/albums/yy262/expressionofmyemotions/tumblr_lrud0coRjU1qhsw0o.gif');
 
+      let users = usersRepository.getAll();
+
+      reviews.forEach(review => {
+         if (review.getId() % 2 === 0) {
+            (<any>review).author = users[2];
+         }
+         else {
+            (<any>review).author = users[1];
+         }
+      });
+
+      return reviews;
+   }
+}
 app.get('/reviews/', (req, res) => {
     let serialized: Array<any> = [];
 
-    reviews.forEach(r => serialized.push(reviewSerializer.serialize(r)));
+    reviewRepository.getAll().forEach(r => serialized.push(reviewSerializer.serialize(r)));
 
     res.send(serialized);
 });
 
 app.get('/reviews/:id', (req, res) => {
     let id = parseInt(req.params['id']);
-    let review = reviews[id];
+    let review = reviewRepository.getAll()[id];
 
     if (review === undefined) {
         res.status(404).json({
@@ -45,21 +61,27 @@ app.get('/reviews/:id', (req, res) => {
     res.send(reviewSerializer.serialize(review));
 });
 
-let users: Array<UserModel> = [];
-users[1] = new UserModel(1, "jameskmonger", "James", "Monger");
-users[2] = new UserModel(2, "james.richford", "James", "Richford");
+let usersRepository =  {
+   getAll: () : Array<UserModel> => {
+      let users: Array<UserModel> = [];
+      users[1] = new UserModel(1, "jameskmonger", "James", "Monger");
+      users[2] = new UserModel(2, "james.richford", "James", "Richford");
+
+      return users;
+   }
+}
 
 app.get('/users/', (req, res) => {
     let serialized: Array<any> = [];
 
-    users.forEach(r => serialized.push(userSerializer.serialize(r)));
+    usersRepository.getAll().forEach(r => serialized.push(userSerializer.serialize(r)));
 
     res.send(serialized);
 });
 
 app.get('/users/:id', (req, res) => {
     let id = parseInt(req.params['id']);
-    let user = users[id];
+    let user = usersRepository.getAll()[id];
 
     if (user === undefined) {
         res.status(404).json({

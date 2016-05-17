@@ -1,5 +1,8 @@
 import { ISerializer } from "./serializer.i";
 import { ReviewModel } from "../models/review-model";
+import { UserSerializer } from "./user-serializer";
+
+let userSerializer = new UserSerializer();
 
 export class ReviewSerializer
     implements ISerializer<ReviewModel>
@@ -11,7 +14,8 @@ export class ReviewSerializer
             title: model.getTitle(),
             body: model.getBody(),
             score: model.getScore(),
-            imageUrl: model.getImageUrl()
+            imageUrl: model.getImageUrl(),
+            author: userSerializer.serialize((<any>model).author)
         };
     }
 
