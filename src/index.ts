@@ -3,9 +3,12 @@
 import * as express from 'express';
 import { ReviewSerializer } from "./serializers/review-serializer";
 import { ReviewModel } from "./models/review-model";
+import { UserSerializer } from "./serializers/user-serializer";
+import { UserModel } from "./models/user-model";
 
 let app = express();
 let reviewSerializer = new ReviewSerializer(); // get some nice IoC here
+let userSerializer = new UserSerializer(); // get some nice IoC here
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:69');
@@ -40,6 +43,34 @@ app.get('/reviews/:id', (req, res) => {
     }
 
     res.send(reviewSerializer.serialize(review));
+});
+
+let users: Array<UserModel> = [];
+users[1] = new UserModel(1, "jameskmonger", "James", "Monger");
+users[2] = new UserModel(2, "james.richford", "James", "Richford");
+
+app.get('/users/', (req, res) => {
+    let serialized: Array<any> = [];
+
+    users.forEach(r => serialized.push(userSerializer.serialize(r)));
+
+    res.send(serialized);
+});
+
+app.get('/users/:id', (req, res) => {
+    let id = parseInt(req.params['id']);
+    let user = users[id];
+
+    if (user === undefined) {
+        res.status(404).json({
+            error: {
+                message: `Resource not found for id '${id}'`
+            }
+        });
+        return;
+    }
+
+    res.send(userSerializer.serialize(user));
 });
 
 app.get('/noodles/', (req, res) => {
