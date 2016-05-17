@@ -15,7 +15,7 @@ export class ReviewSerializer
     }
 
     public deserialize(json: any): ReviewModel {
-        return new ReviewModel(parseInt(json.id), json.title, json.body, json.score);
+        return new ReviewModel(parseInt(json.id), json.title, json.body, json.score, json.imageUrl);
     }
 
 }

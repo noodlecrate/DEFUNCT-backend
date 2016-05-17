@@ -8,7 +8,7 @@ const test = require('modunit');
 test('id is serialized correctly', (t, inputId) => {
 
     let serializer = new ReviewSerializer();
-    let model = new ReviewModel(inputId, 'test title', 'test body', 100.00);
+    let model = new ReviewModel(inputId, 'test title', 'test body', 100.00, '');
     let json = serializer.serialize(model);
 
     t.assert.equal(inputId, json.id);
@@ -22,7 +22,7 @@ test('id is serialized correctly', (t, inputId) => {
 test('title is serialized correctly', (t, inputTitle) => {
 
     let serializer = new ReviewSerializer();
-    let model = new ReviewModel(1, inputTitle, 'test body', 100.00);
+    let model = new ReviewModel(1, inputTitle, 'test body', 100.00, '');
     let json = serializer.serialize(model);
 
     t.assert.equal(inputTitle, json.title);
@@ -36,7 +36,7 @@ test('title is serialized correctly', (t, inputTitle) => {
 test('body is serialized correctly', (t, inputBody) => {
 
     let serializer = new ReviewSerializer();
-    let model = new ReviewModel(1, 'test title', inputBody, 100.00);
+    let model = new ReviewModel(1, 'test title', inputBody, 100.00, '');
     let json = serializer.serialize(model);
 
     t.assert.equal(inputBody, json.body);
@@ -50,7 +50,7 @@ test('body is serialized correctly', (t, inputBody) => {
 test('score is serialized correctly', (t, inputScore) => {
 
     let serializer = new ReviewSerializer();
-    let model = new ReviewModel(1, 'test title', 'test body', inputScore);
+    let model = new ReviewModel(1, 'test title', 'test body', inputScore, '');
     let json = serializer.serialize(model);
 
     t.assert.equal(inputScore, json.score);
@@ -59,4 +59,18 @@ test('score is serialized correctly', (t, inputScore) => {
     [ 10.00 ],
     [ 20.00 ],
     [ 50.00 ]
+]);
+
+test('image url is serialized correctly', (t, inputImageUrl) => {
+
+    let serializer = new ReviewSerializer();
+    let model = new ReviewModel(1, 'test title', 'test body', 100.00, inputImageUrl);
+    let json = serializer.serialize(model);
+
+    t.assert.equal(inputImageUrl, json.imageUrl);
+
+}, [
+    [ 'http://google.com/some-image.jpg' ],
+    [ 'http://facebook.com/image001.png' ],
+    [ 'http://imgur.com/IMAGE.gif' ]
 ]);

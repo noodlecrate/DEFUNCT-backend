@@ -4,12 +4,14 @@ export class ReviewModel {
     private title: string;
     private body: string;
     private score: number;
+    private imageUrl: string;
 
-    constructor (id: number, title: string, body: string, score: number) {
+    constructor (id: number, title: string, body: string, score: number, imageUrl: string) {
         this.id = id;
         this.title = title;
         this.body = body;
         this.score = score;
+        this.imageUrl = imageUrl;
     }
 
     public getId(): number {
@@ -26,6 +28,10 @@ export class ReviewModel {
 
     public getScore(): number {
         return this.score;
+    }
+
+    public getImageUrl(): string {
+        return this.imageUrl;
     }
 
 }
