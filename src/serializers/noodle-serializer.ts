@@ -10,7 +10,11 @@ export class NoodleSerializer
             id: model.id,
             name: model.name,
             descriptioin: model.description,
-            imageUrl: model.imageUrl
+            imageUrl: model.imageUrl,
+            glutenFree: model.glutenFree,
+            lactoseFree: model.lactoseFree,
+            vegetarian: model.vegetarian,
+            vegan: model.vegan
         };
     }
 
