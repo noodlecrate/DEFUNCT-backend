@@ -1,9 +1,11 @@
 import { ReviewModel } from "../models/review-model";
 import { UserRepository } from "./user-repository";
+import { NoodleRepository } from "./noodle-repository";
 
 export class ReviewRepository {
 
   private _userRepository = new UserRepository();
+  private _noodleRepository = new NoodleRepository();
 
    getAll(): Array<ReviewModel> {
       let reviews: Array<ReviewModel> = [];
@@ -12,8 +14,12 @@ export class ReviewRepository {
       reviews[3] = new ReviewModel(3, "They were alright, I suppose...", "They weren't the best, but they weren't the worst. Food's food, I guess.", 50.00, 'http://i798.photobucket.com/albums/yy262/expressionofmyemotions/tumblr_lrud0coRjU1qhsw0o.gif');
 
       let users = this._userRepository.getAll();
+      let noodles = this._noodleRepository.getAll();
 
-      reviews.forEach(review => {
+      reviews.forEach((review, index) => {
+
+        (<any>review).noodle = noodles[index - 1];
+
          if (review.getId() % 2 === 0) {
             (<any>review).author = users[2];
          }

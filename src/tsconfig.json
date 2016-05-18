@@ -28,6 +28,7 @@
         "repositories/noodle-repository.ts",
         "repositories/review-repository.ts",
         "repositories/user-repository.ts",
+        "serializers/noodle-serializer.ts",
         "serializers/review-serializer.ts",
         "serializers/serializer.i.ts",
         "serializers/user-serializer.ts"
