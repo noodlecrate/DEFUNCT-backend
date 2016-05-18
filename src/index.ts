@@ -7,12 +7,14 @@ import { UserSerializer } from "./serializers/user-serializer";
 import { UserModel } from "./models/user-model";
 import { UserRepository } from "./repositories/user-repository";
 import { ReviewRepository } from "./repositories/review-repository";
+import { NoodleRepository } from "./repositories/noodle-repository";
 
 let app = express();
 let reviewSerializer = new ReviewSerializer(); // get some nice IoC here
 let userSerializer = new UserSerializer(); // get some nice IoC here
 let userRepository = new UserRepository();
 let reviewRepository = new ReviewRepository();
+let noodleRepository = new NoodleRepository();
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:69');
@@ -69,24 +71,7 @@ app.get('/users/:id', (req, res) => {
 });
 
 app.get('/noodles/', (req, res) => {
-    res.send([
-        {
-            id: 0,
-            name: 'Prawn Chilli Noodle',
-            description: 'spicy yum yum',
-            image: {
-                thumb: 'http://i.imgur.com/RD2djUw.jpg?1'
-            }
-        },
-        {
-            id: 1,
-            name: 'Shredded Chicken Noodle',
-            description: 'Nicer than fried chicken',
-            image: {
-                thumb: 'http://i.imgur.com/WuJVusY.jpg?1'
-            }
-        }
-    ]);
+    res.send(noodleRepository.getAll());
 });
 
 app.listen(3000);

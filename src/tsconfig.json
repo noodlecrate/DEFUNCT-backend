@@ -22,8 +22,10 @@
     ],
     "files": [
         "index.ts",
+        "models/noodle-model.ts",
         "models/review-model.ts",
         "models/user-model.ts",
+        "repositories/noodle-repository.ts",
         "repositories/review-repository.ts",
         "repositories/user-repository.ts",
         "serializers/review-serializer.ts",
