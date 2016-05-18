@@ -1,8 +1,12 @@
 import { NoodleModel } from "../models/noodle-model";
+import { CountryRepository } from "./country-repository";
 
 export class NoodleRepository {
+
+  private _countryRepository = new CountryRepository();
+
   getAll(): Array<NoodleModel> {
-    return [
+    let noodles =  [
         new NoodleModel(
                 1,
                 'Prawn Chilli Noodle',
@@ -20,6 +24,14 @@ export class NoodleRepository {
                 'Imaginary Noodle',
                 'who knows...',
                 '')
-    ]
+    ];
+
+    let countries = this._countryRepository.getAll();
+
+    noodles.forEach(noodle => {
+      (<any>noodle).country = countries[noodle.id - 1];
+    })
+
+    return noodles;
   }
 }

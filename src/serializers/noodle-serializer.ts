@@ -1,9 +1,11 @@
 import { ISerializer } from "./serializer.i";
 import { NoodleModel } from "../models/noodle-model";
+import { CountrySerializer } from "./country-serializer";
 
 export class NoodleSerializer
     implements ISerializer<NoodleModel>
 {
+    private _countrySerializer = new CountrySerializer();
 
     public serialize(model: NoodleModel): any {
         return {
@@ -14,7 +16,8 @@ export class NoodleSerializer
             glutenFree: model.glutenFree,
             lactoseFree: model.lactoseFree,
             vegetarian: model.vegetarian,
-            vegan: model.vegan
+            vegan: model.vegan,
+            country: this._countrySerializer.serialize((<any>model).country)
         };
     }
 
