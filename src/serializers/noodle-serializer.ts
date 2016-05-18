@@ -17,7 +17,7 @@ export class NoodleSerializer
             lactoseFree: model.lactoseFree,
             vegetarian: model.vegetarian,
             vegan: model.vegan,
-            country: this._countrySerializer.serialize((<any>model).country)
+            countryOfOrigin: this._countrySerializer.serialize((<any>model).countryOfOrigin)
         };
     }
 

@@ -29,7 +29,7 @@ export class NoodleRepository {
     let countries = this._countryRepository.getAll();
 
     noodles.forEach(noodle => {
-      (<any>noodle).country = countries[noodle.id - 1];
+      (<any>noodle).countryOfOrigin = countries[noodle.id - 1];
     })
 
     return noodles;
