@@ -1,9 +1,11 @@
 import { NoodleModel } from "../models/noodle-model";
 import { CountryRepository } from "./country-repository";
+import { BrandRepository } from "./brand-repository";
 
 export class NoodleRepository {
 
   private _countryRepository = new CountryRepository();
+  private _brandRepository = new BrandRepository();
 
   getAll(): Array<NoodleModel> {
     let noodles =  [
@@ -27,9 +29,11 @@ export class NoodleRepository {
     ];
 
     let countries = this._countryRepository.getAll();
+    let brands = this._brandRepository.getAll();
 
     noodles.forEach(noodle => {
       (<any>noodle).countryOfOrigin = countries[noodle.id - 1];
+      (<any>noodle).brand = brands[noodle.id - 1];
     })
 
     return noodles;
