@@ -1,37 +1,38 @@
+import { RatingModel } from "./rating-model";
+
 export class ReviewModel {
 
-    private id: number;
-    private title: string;
-    private body: string;
-    private score: number;
-    private imageUrl: string;
-
-    constructor (id: number, title: string, body: string, score: number, imageUrl: string) {
-        this.id = id;
-        this.title = title;
-        this.body = body;
-        this.score = score;
-        this.imageUrl = imageUrl;
+    private _id: number;
+    get id(): number {
+      return this._id;
     }
 
-    public getId(): number {
-        return this.id;
+    private _title: string;
+    get title(): string {
+      return this._title;
     }
 
-    public getTitle(): string {
-        return this.title;
+    private _body: string;
+    get body(): string {
+      return this._body;
     }
 
-    public getBody(): string {
-        return this.body;
+    private _rating: RatingModel;
+    get rating(): RatingModel {
+      return this._rating;
     }
 
-    public getScore(): number {
-        return this.score;
+    private _imageUrl: string;
+    get imageUrl(): string {
+      return this._imageUrl;
     }
 
-    public getImageUrl(): string {
-        return this.imageUrl;
+    constructor (id: number, title: string, body: string, rating: RatingModel, imageUrl: string) {
+        this._id = id;
+        this._title = title;
+        this._body = body;
+        this._rating = rating;
+        this._imageUrl = imageUrl;
     }
 
 }

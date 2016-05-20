@@ -25,6 +25,7 @@
         "models/brand-model.ts",
         "models/country-model.ts",
         "models/noodle-model.ts",
+        "models/rating-model.ts",
         "models/review-model.ts",
         "models/user-model.ts",
         "repositories/brand-repository.ts",
@@ -35,6 +36,7 @@
         "serializers/brand-serializer.ts",
         "serializers/country-serializer.ts",
         "serializers/noodle-serializer.ts",
+        "serializers/rating-serializer.ts",
         "serializers/review-serializer.ts",
         "serializers/serializer.i.ts",
         "serializers/user-serializer.ts"
