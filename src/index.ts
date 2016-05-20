@@ -9,6 +9,7 @@ import { UserModel } from "./models/user-model";
 import { UserRepository } from "./repositories/user-repository";
 import { ReviewRepository } from "./repositories/review-repository";
 import { NoodleRepository } from "./repositories/noodle-repository";
+import * as  bodyParser from "body-parser";
 
 let app = express();
 let reviewSerializer = new ReviewSerializer(); // get some nice IoC here
@@ -18,8 +19,12 @@ let userRepository = new UserRepository();
 let reviewRepository = new ReviewRepository();
 let noodleRepository = new NoodleRepository();
 
+// parse application/json
+app.use(bodyParser.json())
+
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:69');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type")
 
     next();
 });
