@@ -1,17 +1,21 @@
 /// <reference path="../../../typings/main.d.ts" />
 
 import { ReviewSerializer } from '../../../src/serializers/review-serializer';
+import { NoodleModel } from "../../../src/models/noodle-model";
+import { UserModel } from "../../../src/models/user-model";
 import { ReviewModel } from "../../../src/models/review-model";
 import { RatingModel } from "../../../src/models/rating-model";
 
 const test = require('modunit');
 
+const DUMMY_NOODLE = new NoodleModel(1, 'noodle', 'noodle description', 'http://imgur.com/image.png');
+const DUMMY_USER = new UserModel(1, 'joe.bloggs', 'Joe', 'Bloggs');
 const DUMMY_RATING = new RatingModel(1, 100.00, 100.00, 100.00, 100.00);
 
 test('id is serialized correctly', (t, inputId) => {
 
     let serializer = new ReviewSerializer();
-    let model = new ReviewModel(inputId, 'test title', 'test body', DUMMY_RATING, '');
+    let model = new ReviewModel(inputId, DUMMY_NOODLE, DUMMY_USER, 'test title', 'test body', DUMMY_RATING, '');
     let json = serializer.serialize(model);
 
     t.assert.equal(inputId, json.id);
@@ -25,7 +29,7 @@ test('id is serialized correctly', (t, inputId) => {
 test('title is serialized correctly', (t, inputTitle) => {
 
     let serializer = new ReviewSerializer();
-    let model = new ReviewModel(1, inputTitle, 'test body', DUMMY_RATING, '');
+    let model = new ReviewModel(1, DUMMY_NOODLE, DUMMY_USER, inputTitle, 'test body', DUMMY_RATING, '');
     let json = serializer.serialize(model);
 
     t.assert.equal(inputTitle, json.title);
@@ -39,7 +43,7 @@ test('title is serialized correctly', (t, inputTitle) => {
 test('body is serialized correctly', (t, inputBody) => {
 
     let serializer = new ReviewSerializer();
-    let model = new ReviewModel(1, 'test title', inputBody, DUMMY_RATING, '');
+    let model = new ReviewModel(1, DUMMY_NOODLE, DUMMY_USER, 'test title', inputBody, DUMMY_RATING, '');
     let json = serializer.serialize(model);
 
     t.assert.equal(inputBody, json.body);
@@ -53,7 +57,7 @@ test('body is serialized correctly', (t, inputBody) => {
 test('image url is serialized correctly', (t, inputImageUrl) => {
 
     let serializer = new ReviewSerializer();
-    let model = new ReviewModel(1, 'test title', 'test body', DUMMY_RATING, inputImageUrl);
+    let model = new ReviewModel(1, DUMMY_NOODLE, DUMMY_USER, 'test title', 'test body', DUMMY_RATING, inputImageUrl);
     let json = serializer.serialize(model);
 
     t.assert.equal(inputImageUrl, json.imageUrl);

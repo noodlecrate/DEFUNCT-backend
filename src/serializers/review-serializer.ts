@@ -19,13 +19,13 @@ export class ReviewSerializer
             body: model.body,
             rating: ratingSerializer.serialize(model.rating),
             imageUrl: model.imageUrl,
-            author: userSerializer.serialize((<any>model).author),
-            noodle: noodleSerializer.serialize((<any>model).noodle)
+            author: userSerializer.serialize(model.author),
+            noodle: noodleSerializer.serialize(model.noodle)
         };
     }
 
     public deserialize(json: any): ReviewModel {
-        return new ReviewModel(parseInt(json.id), json.title, json.body, json.score, json.imageUrl);
+        return undefined;
     }
 
 }
