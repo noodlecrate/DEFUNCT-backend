@@ -13,7 +13,7 @@ export class BrandSerializer
     }
 
     public deserialize(json: any): BrandModel {
-        return new BrandModel(parseInt(json.id), json.name);
+        return undefined;
     }
 
 }

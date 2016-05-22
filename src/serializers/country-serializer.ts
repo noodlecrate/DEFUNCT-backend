@@ -13,7 +13,7 @@ export class CountrySerializer
     }
 
     public deserialize(json: any): CountryModel {
-        return new CountryModel(parseInt(json.id), json.name);
+        return undefined;
     }
 
 }

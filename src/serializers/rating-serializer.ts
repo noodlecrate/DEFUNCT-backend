@@ -16,7 +16,7 @@ export class RatingSerializer
     }
 
     public deserialize(json: any): RatingModel {
-        return new RatingModel(parseInt(json.id), parseInt(json.overall), parseInt(json.spice), parseInt(json.umami), parseInt(json.fortitude));
+        return undefined;
     }
 
 }
