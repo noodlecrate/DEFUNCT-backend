@@ -19,13 +19,13 @@ export class NoodleSerializer
             lactoseFree: model.lactoseFree,
             vegetarian: model.vegetarian,
             vegan: model.vegan,
-            countryOfOrigin: this._countrySerializer.serialize((<any>model).countryOfOrigin),
-            brand: this._brandSerializer.serialize((<any>model).brand)
+            countryOfOrigin: this._countrySerializer.serialize(model.countryOfOrigin),
+            brand: this._brandSerializer.serialize(model.brand)
         };
     }
 
     public deserialize(json: any): NoodleModel {
-        return new NoodleModel(parseInt(json.id), json.name, json.description, json.imageUrl);
+        return undefined;
     }
 
 }

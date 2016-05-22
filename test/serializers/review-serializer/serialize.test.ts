@@ -5,10 +5,14 @@ import { NoodleModel } from "../../../src/models/noodle-model";
 import { UserModel } from "../../../src/models/user-model";
 import { ReviewModel } from "../../../src/models/review-model";
 import { RatingModel } from "../../../src/models/rating-model";
+import { CountryModel } from "../../../src/models/country-model";
+import { BrandModel } from "../../../src/models/brand-model";
 
 const test = require('modunit');
 
-const DUMMY_NOODLE = new NoodleModel(1, 'noodle', 'noodle description', 'http://imgur.com/image.png');
+const DUMMY_COUNTRY = new CountryModel(1, 'Japan');
+const DUMMY_BRAND = new BrandModel(1, 'Pot Noodle');
+const DUMMY_NOODLE = new NoodleModel(1, 'noodle', 'noodle description', 'http://imgur.com/image.png', DUMMY_COUNTRY, DUMMY_BRAND);
 const DUMMY_USER = new UserModel(1, 'joe.bloggs', 'Joe', 'Bloggs');
 const DUMMY_RATING = new RatingModel(1, 100.00, 100.00, 100.00, 100.00);
 
