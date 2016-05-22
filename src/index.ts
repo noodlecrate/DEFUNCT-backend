@@ -119,3 +119,5 @@ app.post("/session", (req: express.Request, res: express.Response) => {
 });
 
 app.listen(3000);
+
+console.log("noodlecrate-backend listening on 3000");
