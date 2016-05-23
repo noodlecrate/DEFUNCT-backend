@@ -1,7 +1,8 @@
+import { IModel } from "./model.i";
 import { CountryModel } from "./country-model";
 import { BrandModel } from "./brand-model";
 
-export class NoodleModel {
+export class NoodleModel implements IModel {
 
     public id: number;
     public name: string;

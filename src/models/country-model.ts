@@ -1,4 +1,6 @@
-export class CountryModel {
+import { IModel } from "./model.i";
+
+export class CountryModel implements IModel {
 
     public id: number;
     public name: string;

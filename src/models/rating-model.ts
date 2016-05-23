@@ -1,4 +1,6 @@
-export class RatingModel {
+import { IModel } from "./model.i";
+
+export class RatingModel implements IModel {
 
     public id: number;
     public overall: number;

@@ -1,4 +1,6 @@
-export class BrandModel {
+import { IModel } from "./model.i";
+
+export class BrandModel implements IModel {
 
     public id: number;
     public name: string;

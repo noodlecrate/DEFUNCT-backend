@@ -1,4 +1,6 @@
-export class UserModel {
+import { IModel } from "./model.i";
+
+export class UserModel implements IModel {
 
     private id: number;
     private username: string;

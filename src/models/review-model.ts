@@ -1,8 +1,9 @@
+import { IModel } from "./model.i";
 import { NoodleModel } from "./noodle-model";
 import { UserModel } from "./user-model";
 import { RatingModel } from "./rating-model";
 
-export class ReviewModel {
+export class ReviewModel implements IModel {
 
     private _id: number;
     get id(): number {
