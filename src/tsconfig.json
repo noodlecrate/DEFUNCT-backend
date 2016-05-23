@@ -24,6 +24,7 @@
         "index.ts",
         "models/brand-model.ts",
         "models/country-model.ts",
+        "models/model.i.ts",
         "models/noodle-model.ts",
         "models/rating-model.ts",
         "models/review-model.ts",
