@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/main.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import { UserSerializer } from '../../../src/serializers/user-serializer';
 import { UserModel } from "../../../src/models/user-model";

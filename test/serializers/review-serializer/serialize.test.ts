@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/main.d.ts" />
+/// <reference path="../../../typings/index.d.ts" />
 
 import { ReviewSerializer } from '../../../src/serializers/review-serializer';
 import { NoodleModel } from "../../../src/models/noodle-model";
