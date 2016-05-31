@@ -23,6 +23,8 @@ let reviewRepository = new ReviewRepository();
 let noodleRepository = new NoodleRepository();
 
 app.use(passport.initialize());
+ app.use(passport.session());
+ app.use(express.cookieParser());
 
 passport.use(new LocalStrategy(
     (username, password, done) => {
@@ -41,6 +43,20 @@ passport.use(new LocalStrategy(
     }
 ));
 
+passport.serializeUser((user: UserModel, done: (error: Error, id: number) => any) => {
+   done(null, user.getId());
+});
+
+passport.deserializeUser((id: number, done: (error: Error, user: UserModel) => any) => {
+   let foundUser = userRepository.getAll().filter((user: UserModel) => {
+      return user.getId() == id;
+   })[0];
+
+   console.log("found", JSON.stringify(foundUser));
+
+   done(null, foundUser);
+});
+
 // parse application/json
 app.use(bodyParser.json())
 
@@ -52,6 +68,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/reviews/', (req, res) => {
+   console.log(req.user);
     let serialized: Array<any> = [];
 
     reviewRepository.getAll().forEach(r => serialized.push(reviewSerializer.serialize(r)));
@@ -132,9 +149,7 @@ app.post("/review", (req: express.Request, res: express.Response) => {
 });
 
 app.post("/session",
-    passport.authenticate('local', {
-      session: false
-    }),
+    passport.authenticate('local'),
     (req: express.Request, res: express.Response) => {
         // if we reach this point, we authenticated correctly
         res.sendStatus(201);
