@@ -10,6 +10,7 @@ import { UserRepository } from "./repositories/user-repository";
 import { ReviewRepository } from "./repositories/review-repository";
 import { NoodleRepository } from "./repositories/noodle-repository";
 import * as  bodyParser from "body-parser";
+import * as cookieParser from "cookie-parser";
 
 import * as passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
@@ -24,7 +25,7 @@ let noodleRepository = new NoodleRepository();
 
 app.use(passport.initialize());
  app.use(passport.session());
- app.use(express.cookieParser());
+ app.use(cookieParser());
 
 passport.use(new LocalStrategy(
     (username, password, done) => {
