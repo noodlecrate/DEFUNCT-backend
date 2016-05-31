@@ -23,7 +23,7 @@
     "modunit": "^0.3.0",
     "tap-heart": "^0.2.1",
     "typescript": "^1.8.10",
-    "typings": "^0.8.1"
+    "typings": "^1.0.0"
   },
   "dependencies": {
     "body-parser": "^1.15.1",
