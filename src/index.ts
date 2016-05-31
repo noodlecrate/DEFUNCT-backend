@@ -22,6 +22,8 @@ let userRepository = new UserRepository();
 let reviewRepository = new ReviewRepository();
 let noodleRepository = new NoodleRepository();
 
+app.use(passport.initialize());
+
 passport.use(new LocalStrategy(
     (username, password, done) => {
         let users = userRepository.getAll();
