@@ -132,7 +132,9 @@ app.post("/review", (req: express.Request, res: express.Response) => {
 });
 
 app.post("/session",
-    passport.authenticate('local'),
+    passport.authenticate('local', {
+      session: false
+    }),
     (req: express.Request, res: express.Response) => {
         // if we reach this point, we authenticated correctly
         res.sendStatus(201);
