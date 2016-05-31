@@ -129,14 +129,13 @@ app.post("/review", (req: express.Request, res: express.Response) => {
   res.sendStatus(201);
 });
 
-app.post("/session", (req: express.Request, res: express.Response) => {
-  if (req.body.password === "correct") {
-    res.sendStatus(201);
-  }
-  else {
-    res.sendStatus(401);
-  }
-});
+app.post("/session",
+    passport.authenticate('local'),
+    (req: express.Request, res: express.Response) => {
+        // if we reach this point, we authenticated correctly
+        res.sendStatus(201);
+    }
+);
 
 app.listen(3000);
 
