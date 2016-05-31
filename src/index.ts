@@ -11,6 +11,9 @@ import { ReviewRepository } from "./repositories/review-repository";
 import { NoodleRepository } from "./repositories/noodle-repository";
 import * as  bodyParser from "body-parser";
 
+import * as passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
+
 let app = express();
 let reviewSerializer = new ReviewSerializer(); // get some nice IoC here
 let userSerializer = new UserSerializer(); // get some nice IoC here
@@ -18,6 +21,25 @@ let noodleSerializer = new NoodleSerializer();
 let userRepository = new UserRepository();
 let reviewRepository = new ReviewRepository();
 let noodleRepository = new NoodleRepository();
+
+app.use(passport.initialize());
+
+passport.use(new LocalStrategy(
+    (username, password, done) => {
+        let users = userRepository.getAll();
+
+        let usernameFilter = users.filter(u => u.getUsername() === username);
+        if (!usernameFilter || usernameFilter.length !== 1) {
+            return done(null, false, { message: 'Incorrect username.' });
+        }
+
+        if (!password || password !== "correct") {
+            return done(null, false, { message: 'Incorrect password.' });
+        }
+
+        return done(null, usernameFilter[0]);
+    }
+));
 
 // parse application/json
 app.use(bodyParser.json())
@@ -109,14 +131,15 @@ app.post("/review", (req: express.Request, res: express.Response) => {
   res.sendStatus(201);
 });
 
-app.post("/session", (req: express.Request, res: express.Response) => {
-  if (req.body.password === "correct") {
-    res.sendStatus(201);
-  }
-  else {
-    res.sendStatus(401);
-  }
-});
+app.post("/session",
+    passport.authenticate('local', {
+      session: false
+    }),
+    (req: express.Request, res: express.Response) => {
+        // if we reach this point, we authenticated correctly
+        res.sendStatus(201);
+    }
+);
 
 app.listen(3000);
 
