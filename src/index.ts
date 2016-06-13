@@ -1,6 +1,5 @@
 /// <reference path="../typings/index.d.ts" />
 
-import * as express from 'express';
 import { ReviewSerializer } from "./serializers/review-serializer";
 import { ReviewModel } from "./models/review-model";
 import { UserSerializer } from "./serializers/user-serializer";
@@ -9,8 +8,11 @@ import { UserModel } from "./models/user-model";
 import { UserRepository } from "./repositories/user-repository";
 import { ReviewRepository } from "./repositories/review-repository";
 import { NoodleRepository } from "./repositories/noodle-repository";
-import * as  bodyParser from "body-parser";
-import * as cookieParser from "cookie-parser";
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const expressSession = require('express-session');
 
 import * as passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
@@ -23,9 +25,15 @@ let userRepository = new UserRepository();
 let reviewRepository = new ReviewRepository();
 let noodleRepository = new NoodleRepository();
 
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(expressSession({
+    secret: 'my secret key',
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(passport.initialize());
- app.use(passport.session());
- app.use(cookieParser());
+app.use(passport.session());
 
 passport.use(new LocalStrategy(
     (username, password, done) => {
@@ -53,13 +61,8 @@ passport.deserializeUser((id: number, done: (error: Error, user: UserModel) => a
       return user.getId() == id;
    })[0];
 
-   console.log("found", JSON.stringify(foundUser));
-
    done(null, foundUser);
 });
-
-// parse application/json
-app.use(bodyParser.json())
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -137,13 +140,13 @@ app.get('/noodles/:id', (req, res) => {
     res.send(noodleSerializer.serialize(noodle));
 });
 
-app.post("/noodle", (req: express.Request, res: express.Response) => {
+app.post("/noodle", (req: any, res: any) => {
   noodleRepository.insert(req.body);
 
   res.sendStatus(201);
 });
 
-app.post("/review", (req: express.Request, res: express.Response) => {
+app.post("/review", (req: any, res: any) => {
   reviewRepository.insert(req.body);
 
   res.sendStatus(201);
@@ -151,7 +154,7 @@ app.post("/review", (req: express.Request, res: express.Response) => {
 
 app.post("/session",
     passport.authenticate('local'),
-    (req: express.Request, res: express.Response) => {
+    (req: any, res: any) => {
         // if we reach this point, we authenticated correctly
         res.sendStatus(201);
     }
