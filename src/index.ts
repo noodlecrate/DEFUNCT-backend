@@ -30,8 +30,17 @@ app.use(bodyParser.json());
 app.use(expressSession({
     secret: 'my secret key',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        secure: false
+    }
 }));
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type")
+
+    next();
+});
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -62,13 +71,6 @@ passport.deserializeUser((id: number, done: (error: Error, user: UserModel) => a
    })[0];
 
    done(null, foundUser);
-});
-
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type")
-
-    next();
 });
 
 app.get('/reviews/', (req, res) => {
@@ -155,8 +157,13 @@ app.post("/review", (req: any, res: any) => {
 app.post("/session",
     passport.authenticate('local'),
     (req: any, res: any) => {
-        // if we reach this point, we authenticated correctly
-        res.sendStatus(201);
+        req.logIn(req.user, (err: any) => {
+            if (err)
+                throw err;
+
+            // if we reach this point, we authenticated correctly
+            res.sendStatus(201);
+        });
     }
 );
 
