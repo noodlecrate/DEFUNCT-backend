@@ -29,20 +29,40 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(expressSession({
     secret: 'my secret key',
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     cookie: {
         secure: false
     }
 }));
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type")
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
 
-    next();
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+        res.sendStatus(200);
+    }
+    else {
+        next();
+    }
 });
 app.use(passport.initialize());
 app.use(passport.session());
+
+passport.serializeUser((user: UserModel, done: (error: Error, id: number) => any) => {
+   done(null, user.getId());
+});
+
+passport.deserializeUser((id: number, done: (error: Error, user: UserModel) => any) => {
+   let foundUser = userRepository.getAll().filter((user: UserModel) => {
+      return user.getId() == id;
+   })[0];
+
+   done(null, foundUser);
+});
 
 passport.use(new LocalStrategy(
     (username, password, done) => {
@@ -60,18 +80,6 @@ passport.use(new LocalStrategy(
         return done(null, usernameFilter[0]);
     }
 ));
-
-passport.serializeUser((user: UserModel, done: (error: Error, id: number) => any) => {
-   done(null, user.getId());
-});
-
-passport.deserializeUser((id: number, done: (error: Error, user: UserModel) => any) => {
-   let foundUser = userRepository.getAll().filter((user: UserModel) => {
-      return user.getId() == id;
-   })[0];
-
-   done(null, foundUser);
-});
 
 app.get('/reviews/', (req, res) => {
    console.log(req.user);
